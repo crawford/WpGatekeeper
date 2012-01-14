@@ -1,6 +1,7 @@
-﻿using Microsoft.Phone.Controls;
+﻿using System;
 using System.Windows.Navigation;
 using System.Windows.Controls;
+using Microsoft.Phone.Controls;
 using WpGatekeeper.Models;
 
 namespace WpGatekeeper.Views
@@ -26,6 +27,21 @@ namespace WpGatekeeper.Views
         {
             Button button = sender as Button;
             App.MainViewModel.PopDoor(button.DataContext as Door);
+        }
+
+        private void abbSettings_Click(object sender, System.EventArgs e)
+        {
+            App.SettingsViewModel.ShowView(NavigationService);
+        }
+
+        private void abbRefresh_Click(object sender, System.EventArgs e)
+        {
+            App.MainViewModel.UpdateDoors();
+        }
+
+        private void abmAbout_Click(object sender, System.EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/views/AboutPage.xaml", UriKind.Relative));
         }
     }
 }

@@ -10,9 +10,18 @@ namespace WpGatekeeper.Data
 {
     public class GatekeeperService
     {
+        private string _username;
+        private string _password;
+
+        public void SetUsernamePassword(string username, string password)
+        {
+            _username = username;
+            _password = password;
+        }
+
         public void FetchDoorStates(Action<List<Door>> callback)
         {
-            HttpWebRequest request = WebRequest.CreateHttp(@"https://gatekeeper.csh.rit.edu/api/all_doors");
+            HttpWebRequest request = WebRequest.CreateHttp(@"http://gatekeeper.csh.rit.edu/api/all_doors");
             request.Method = "POST";
             request.BeginGetRequestStream((reqResult) =>
             {
@@ -44,22 +53,31 @@ namespace WpGatekeeper.Data
 
         public void PopDoor(Door door, Action<Response> callback)
         {
-            HttpWebRequest request = WebRequest.CreateHttp(String.Format("https://gatekeeper.csh.rit.edu/api/pop/{0}", door.Id));
+            HttpWebRequest request = WebRequest.CreateHttp(String.Format("http://gatekeeper.csh.rit.edu/api/pop/{0}", door.Id));
             request.Method = "POST";
             request.BeginGetRequestStream((reqResult) =>
             {
                 Stream requestStream = request.EndGetRequestStream(reqResult);
                 using (StreamWriter writer = new StreamWriter(requestStream))
                 {
-                    writer.Write("username=<username>,password=<password>");
+                    writer.Write(String.Format("username={0},password={1}", _username, _password));
                 }
 
                 request.BeginGetResponse((resResult) =>
                 {
-                    Stream responseStream = request.EndGetResponse(resResult).GetResponseStream();
-                    DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Response));
-                    Response temp = serializer.ReadObject(responseStream) as Response;
-                    callback(temp);
+                    try
+                    {
+                        Stream responseStream = request.EndGetResponse(resResult).GetResponseStream();
+                        DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Response));
+                        Response temp = serializer.ReadObject(responseStream) as Response;
+                        callback(temp);
+                    }
+                    catch (WebException e) {
+                        System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
+                        {
+                            MessageBox.Show(e.Message);
+                        });
+                    }
                 }, null);
             }, null);
         }

@@ -24,14 +24,7 @@ namespace WpGatekeeper.ViewModels
         public MainViewModel(GatekeeperService service)
         {
             _service = service;
-            _service.FetchDoorStates((list) =>
-            {
-                _doors = new ObservableCollection<Door>(list);
-                System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
-                {
-                    NotifyPropertyChanged("Doors");
-                });
-            });
+            UpdateDoors();
         }
 
         public void PopDoor(Door door) {
@@ -44,6 +37,18 @@ namespace WpGatekeeper.ViewModels
                         MessageBox.Show(response.Error);
                     });
                 }
+            });
+        }
+
+        public void UpdateDoors()
+        {
+            _service.FetchDoorStates((list) =>
+            {
+                _doors = new ObservableCollection<Door>(list);
+                System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    NotifyPropertyChanged("Doors");
+                });
             });
         }
 
