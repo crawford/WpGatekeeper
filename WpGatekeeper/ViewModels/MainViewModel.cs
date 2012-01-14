@@ -10,7 +10,7 @@ namespace WpGatekeeper.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private ObservableCollection<Door> _doors;
-        private ContactService _service;
+        private GatekeeperService _service;
 
         // Parameterless contructor used for designtime contruction
         public MainViewModel()
@@ -20,16 +20,16 @@ namespace WpGatekeeper.ViewModels
         }
 
         // Parametered contructor used for runtime construction
-        public MainViewModel(ContactService service)
-            : this()
+        public MainViewModel(GatekeeperService service)
         {
             _service = service;
-            _service.GetContacts((list) =>
+            _service.FetchDoorStates((list) =>
             {
-                foreach (Door contact in list)
+                _contacts = new ObservableCollection<Door>(list);
+                System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    _doors.Add(contact);
-                }
+                    NotifyPropertyChanged("Doors");
+                });
             });
         }
 

@@ -52,6 +52,8 @@
   <ItemGroup>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Interop" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Servicemodel.Web" />
     <Reference Include="System.Windows" />
     <Reference Include="mscorlib" />
     <Reference Include="system" />
@@ -65,8 +67,9 @@
     </Compile>
     <Compile Include="Converters\LockStatusColorConverter.cs" />
     <Compile Include="Converters\LockStatusConverter.cs" />
-    <Compile Include="Data\ContactService.cs" />
+    <Compile Include="Data\GatekeeperService.cs" />
     <Compile Include="Models\Door.cs" />
+    <Compile Include="Models\Response.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

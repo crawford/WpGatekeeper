@@ -23,7 +23,7 @@ namespace WpGatekeeper
             get
             {
                 if (_mainViewModel == null)
-                    _mainViewModel = new MainViewModel(new ContactService());
+                    _mainViewModel = new MainViewModel(new GatekeeperService());
 
                 return _mainViewModel;
             }
