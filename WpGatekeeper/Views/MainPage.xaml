@@ -11,7 +11,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait" 
     d:DataContext="{d:DesignData ../Design/MainViewModelData.xaml}"
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768" 
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696" 
     shell:SystemTray.IsVisible="True">
 
     <phone:PhoneApplicationPage.Resources>
@@ -22,10 +22,21 @@
             <Setter Property="Foreground" Value="Gray" />
         </Style>
         <DataTemplate x:Key="ContactsTemplate">
-            <StackPanel Margin="0, 10">
-                <TextBlock Text="{Binding Name}" Style="{StaticResource ContactHeaderStyle}" />
-                <TextBlock Text="{Binding PhoneNumber, Converter={StaticResource PhoneNumberConvertor}}" Style="{StaticResource ContactNumberStyle}" />
-            </StackPanel>
+            <Grid Margin="0, 10">
+            	<Grid.Background>
+            		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            			<GradientStop Color="#FF141313" Offset="0.1"/>
+            			<GradientStop Color="#FF141313" Offset="0.9"/>
+            			<GradientStop Color="#00141313"/>
+            			<GradientStop Color="#00141313" Offset="1"/>
+            		</LinearGradientBrush>
+            	</Grid.Background>
+            	<StackPanel Margin="0, 10">
+                	<TextBlock Text="{Binding Name}" Style="{StaticResource ContactHeaderStyle}" />
+                    <TextBlock Text="{Binding Status, Converter={StaticResource LockStatusConverter}}" Style="{StaticResource ContactNumberStyle}" Foreground="{Binding Status, Converter={StaticResource LockStatusColorConverter}}" />
+           		</StackPanel>
+				<Button  Content="Pop" HorizontalAlignment="Right" MinWidth="150" BorderThickness="0" Background="#FF007FFF" Click="Button_Click" BorderBrush="DarkGray" ClickMode="Press" />
+			</Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
     
@@ -54,8 +65,14 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentGrid" Grid.Row="1">
-            <ListBox ItemsSource="{Binding Contacts}" ItemTemplate="{StaticResource ContactsTemplate}" />
+        <Grid x:Name="ContentGrid" Grid.Row="1" Background="Black">
+            <ListBox ItemsSource="{Binding Doors}" ItemTemplate="{StaticResource ContactsTemplate}" >
+            	<ListBox.ItemContainerStyle>
+            		<Style TargetType="ListBoxItem">
+            			<Setter Property="HorizontalContentAlignment" Value="Stretch"/>       		
+					</Style>        	
+				</ListBox.ItemContainerStyle>
+			</ListBox>
         </Grid>
     </Grid>
 

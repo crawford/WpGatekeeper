@@ -8,7 +8,8 @@
 
     <!--Application Resources-->
     <Application.Resources>
-        <cvt:PhoneNumberConverter x:Key="PhoneNumberConvertor" />
+        <cvt:LockStatusConverter x:Key="LockStatusConverter" />
+        <cvt:LockStatusColorConverter x:Key="LockStatusColorConverter" />
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

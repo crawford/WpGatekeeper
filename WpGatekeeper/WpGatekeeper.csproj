@@ -63,9 +63,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\PhoneNumberConverter.cs" />
+    <Compile Include="Converters\LockStatusColorConverter.cs" />
+    <Compile Include="Converters\LockStatusConverter.cs" />
     <Compile Include="Data\ContactService.cs" />
-    <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\Door.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

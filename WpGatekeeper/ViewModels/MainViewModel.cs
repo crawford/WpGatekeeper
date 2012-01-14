@@ -9,14 +9,14 @@ namespace WpGatekeeper.ViewModels
     public class MainViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private ObservableCollection<Contact> _contacts;
+        private ObservableCollection<Door> _doors;
         private ContactService _service;
 
         // Parameterless contructor used for designtime contruction
         public MainViewModel()
         {
-            _contacts = new ObservableCollection<Contact>();
-            _contacts.CollectionChanged += (s, e) => { NotifyPropertyChanged("Contacts"); };
+            _doors = new ObservableCollection<Door>();
+            _doors.CollectionChanged += (s, e) => { NotifyPropertyChanged("Doors"); };
         }
 
         // Parametered contructor used for runtime construction
@@ -26,9 +26,9 @@ namespace WpGatekeeper.ViewModels
             _service = service;
             _service.GetContacts((list) =>
             {
-                foreach (Contact contact in list)
+                foreach (Door contact in list)
                 {
-                    _contacts.Add(contact);
+                    _doors.Add(contact);
                 }
             });
         }
@@ -43,19 +43,19 @@ namespace WpGatekeeper.ViewModels
 
         #region Getters and Setters
 
-        public ObservableCollection<Contact> Contacts
+        public ObservableCollection<Door> Doors
         {
             get
             {
-                return _contacts;
+                return _doors;
             }
 
             private set
             {
-                if (_contacts != value)
+                if (_doors != value)
                 {
-                    _contacts = value;
-                    NotifyPropertyChanged("Contacts");
+                    _doors = value;
+                    NotifyPropertyChanged("Doors");
                 }
             }
         }
