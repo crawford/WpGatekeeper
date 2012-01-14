@@ -19,5 +19,10 @@ namespace WpGatekeeper.Views
             if (DataContext == null)
                 DataContext = App.MainViewModel;
         }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }
