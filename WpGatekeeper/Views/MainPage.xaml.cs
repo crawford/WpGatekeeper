@@ -1,5 +1,7 @@
 ﻿using Microsoft.Phone.Controls;
 using System.Windows.Navigation;
+using System.Windows.Controls;
+using WpGatekeeper.Models;
 
 namespace WpGatekeeper.Views
 {
@@ -20,9 +22,10 @@ namespace WpGatekeeper.Views
                 DataContext = App.MainViewModel;
         }
 
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Pop_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            Button button = sender as Button;
+            App.MainViewModel.PopDoor(button.DataContext as Door);
         }
     }
 }

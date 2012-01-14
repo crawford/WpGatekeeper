@@ -7,29 +7,30 @@ namespace WpGatekeeper.Models
     public class Response
     {
         [DataMember(Name = "error")]
-        public string ErrorString
+        public string Error { get; set; }
+
+        [DataMember(Name = "success")]
+        public string SuccessString
         {
             get
             {
-                return Error.ToString();
+                return Success.ToString();
             }
-            set {
+            set
+            {
                 switch (value.ToLower())
                 {
                     case "true":
-                        Error = true;
+                        Success = true;
                         break;
                     case "false":
-                        Error = false;
+                        Success = false;
                         break;
                     default:
-                        throw (new ArgumentException("Invalid error"));
+                        throw (new ArgumentException("Invalid success value"));
                 }
             }
         }
-        public bool Error { get; set; }
-
-        [DataMember(Name = "success")]
-        public string Success { get; set; }
+        public bool Success { get; set; }
     }
 }

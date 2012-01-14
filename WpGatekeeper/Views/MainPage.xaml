@@ -15,27 +15,19 @@
     shell:SystemTray.IsVisible="True">
 
     <phone:PhoneApplicationPage.Resources>
-        <Style x:Key="ContactHeaderStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="40" />
+        <Style x:Key="DoorHeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="30" />
         </Style>
-        <Style x:Key="ContactNumberStyle" TargetType="TextBlock">
+        <Style x:Key="DoorNumberStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="Gray" />
         </Style>
         <DataTemplate x:Key="ContactsTemplate">
-            <Grid Margin="0, 10">
-            	<Grid.Background>
-            		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            			<GradientStop Color="#FF141313" Offset="0.1"/>
-            			<GradientStop Color="#FF141313" Offset="0.9"/>
-            			<GradientStop Color="#00141313"/>
-            			<GradientStop Color="#00141313" Offset="1"/>
-            		</LinearGradientBrush>
-            	</Grid.Background>
+            <Grid>
             	<StackPanel Margin="0, 10">
-                	<TextBlock Text="{Binding Name}" Style="{StaticResource ContactHeaderStyle}" />
-                    <TextBlock Text="{Binding Status, Converter={StaticResource LockStatusConverter}}" Style="{StaticResource ContactNumberStyle}" Foreground="{Binding Status, Converter={StaticResource LockStatusColorConverter}}" />
+                    <TextBlock Text="{Binding Name}" Style="{StaticResource DoorHeaderStyle}" />
+                    <TextBlock Text="{Binding Status, Converter={StaticResource LockStatusConverter}}" Style="{StaticResource DoorNumberStyle}" Foreground="{Binding Status, Converter={StaticResource LockStatusColorConverter}}" />
            		</StackPanel>
-				<Button  Content="Pop" HorizontalAlignment="Right" MinWidth="150" BorderThickness="0" Background="#FF007FFF" Click="Button_Click" BorderBrush="DarkGray" ClickMode="Press" />
+				<Button Content="Pop" HorizontalAlignment="Right" MinWidth="150" Click="Pop_Click" ClickMode="Press" />
 			</Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
@@ -60,8 +52,8 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="24,24,0,12">
-            <TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="page name" Margin="-3,-8,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="GATEKEEPER" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="all doors" Margin="-3,-8,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->

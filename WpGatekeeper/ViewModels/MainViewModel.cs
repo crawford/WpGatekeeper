@@ -3,6 +3,7 @@ using WpGatekeeper.Models;
 using System.Collections.ObjectModel;
 using WpGatekeeper.Data;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace WpGatekeeper.ViewModels
 {
@@ -25,11 +26,24 @@ namespace WpGatekeeper.ViewModels
             _service = service;
             _service.FetchDoorStates((list) =>
             {
-                _contacts = new ObservableCollection<Door>(list);
+                _doors = new ObservableCollection<Door>(list);
                 System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
                     NotifyPropertyChanged("Doors");
                 });
+            });
+        }
+
+        public void PopDoor(Door door) {
+            _service.PopDoor(door, (response) =>
+            {
+                if (!response.Success)
+                {
+                    System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
+                    {
+                        MessageBox.Show(response.Error);
+                    });
+                }
             });
         }
 
