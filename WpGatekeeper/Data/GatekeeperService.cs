@@ -10,18 +10,21 @@ namespace WpGatekeeper.Data
 {
     public class GatekeeperService
     {
+        private string _username;
+        private string _password;
+
+        public void SetUsernamePassword(string username, string password)
+        {
+            _username = username;
+            _password = password;
+        }
+
         public void FetchDoorStates(Action<List<Door>> callback)
         {
             HttpWebRequest request = WebRequest.CreateHttp(@"https://gatekeeper.csh.rit.edu/api/all_doors");
             request.Method = "POST";
             request.BeginGetRequestStream((reqResult) =>
             {
-                Stream requestStream = request.EndGetRequestStream(reqResult);
-                using (StreamWriter writer = new StreamWriter(requestStream))
-                {
-
-                }
-
                 request.BeginGetResponse((resResult) =>
                 {
                     try
@@ -51,15 +54,25 @@ namespace WpGatekeeper.Data
                 Stream requestStream = request.EndGetRequestStream(reqResult);
                 using (StreamWriter writer = new StreamWriter(requestStream))
                 {
-                    writer.Write("username=<username>,password=<password>");
+                    writer.Write(String.Format("username={0},password={1}", _username, _password));
                 }
 
                 request.BeginGetResponse((resResult) =>
                 {
-                    Stream responseStream = request.EndGetResponse(resResult).GetResponseStream();
-                    DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Response));
-                    Response temp = serializer.ReadObject(responseStream) as Response;
-                    callback(temp);
+                    try
+                    {
+                        Stream responseStream = request.EndGetResponse(resResult).GetResponseStream();
+                        DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Response));
+                        Response temp = serializer.ReadObject(responseStream) as Response;
+                        callback(temp);
+                    }
+                    catch (WebException e)
+                    {
+                        System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
+                        {
+                            MessageBox.Show(e.Message);
+                        });
+                    }
                 }, null);
             }, null);
         }

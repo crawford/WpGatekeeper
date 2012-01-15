@@ -36,10 +36,10 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem x:Name="menuItem1" Text="MenuItem 1" />
-                <shell:ApplicationBarMenuItem x:Name="menuItem2" Text="MenuItem 2" />
+                <shell:ApplicationBarMenuItem x:Name="abmAbout" Text="about" Click="abmAbout_Click" />
             </shell:ApplicationBar.MenuItems>
-            <shell:ApplicationBarIconButton x:Name="AbbDelete" Text="delete" IconUri="/Images/appbar.delete.png" />
+            <shell:ApplicationBarIconButton x:Name="abbSettings" Text="settings" IconUri="/Images/appbar.feature.settings.rest.png" Click="abbSettings_Click" />
+            <shell:ApplicationBarIconButton x:Name="abbRefresh" IconUri="/Images/appbar.refresh.rest.png" Text="refresh" Click="abbRefresh_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
     
@@ -51,9 +51,9 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="24,24,0,12">
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="GATEKEEPER" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="all doors" Margin="-3,-8,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Text="all doors" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
