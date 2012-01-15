@@ -4,10 +4,10 @@
     xmlns:vms="clr-namespace:WpGatekeeper.ViewModels"
     xmlns:mds="clr-namespace:WpGatekeeper.Models">
 
-    <vms:MainViewModel.Contacts>
-        <mds:Contact Name="Test 1" PhoneNumber="1234567890" />
-        <mds:Contact Name="Test 2" PhoneNumber="0222222222" />
-        <mds:Contact Name="Test 3" PhoneNumber="3333333333" />
-        <mds:Contact Name="Test 4" PhoneNumber="4444444444" />
-    </vms:MainViewModel.Contacts>
+    <vms:MainViewModel.Doors>
+        <mds:Door Name="Project Room" Status="locked" />
+        <mds:Door Name="User Center" Status="unlocked" />
+        <mds:Door Name="Research Room" Status="unknown" />
+    </vms:MainViewModel.Doors>
+    
 </vms:MainViewModel>

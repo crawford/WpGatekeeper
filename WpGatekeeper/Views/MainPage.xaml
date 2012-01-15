@@ -11,21 +11,24 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait" 
     d:DataContext="{d:DesignData ../Design/MainViewModelData.xaml}"
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768" 
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696" 
     shell:SystemTray.IsVisible="True">
 
     <phone:PhoneApplicationPage.Resources>
-        <Style x:Key="ContactHeaderStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="40" />
+        <Style x:Key="DoorHeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="30" />
         </Style>
-        <Style x:Key="ContactNumberStyle" TargetType="TextBlock">
+        <Style x:Key="DoorNumberStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="Gray" />
         </Style>
         <DataTemplate x:Key="ContactsTemplate">
-            <StackPanel Margin="0, 10">
-                <TextBlock Text="{Binding Name}" Style="{StaticResource ContactHeaderStyle}" />
-                <TextBlock Text="{Binding PhoneNumber, Converter={StaticResource PhoneNumberConvertor}}" Style="{StaticResource ContactNumberStyle}" />
-            </StackPanel>
+            <Grid>
+            	<StackPanel Margin="0, 10">
+                    <TextBlock Text="{Binding Name}" Style="{StaticResource DoorHeaderStyle}" />
+                    <TextBlock Text="{Binding Status, Converter={StaticResource LockStatusConverter}}" Style="{StaticResource DoorNumberStyle}" Foreground="{Binding Status, Converter={StaticResource LockStatusColorConverter}}" />
+           		</StackPanel>
+				<Button Content="Pop" HorizontalAlignment="Right" MinWidth="150" Click="Pop_Click" ClickMode="Press" />
+			</Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
     
@@ -33,10 +36,10 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem x:Name="menuItem1" Text="MenuItem 1" />
-                <shell:ApplicationBarMenuItem x:Name="menuItem2" Text="MenuItem 2" />
+                <shell:ApplicationBarMenuItem x:Name="abmAbout" Text="about" Click="abmAbout_Click" />
             </shell:ApplicationBar.MenuItems>
-            <shell:ApplicationBarIconButton x:Name="AbbDelete" Text="delete" IconUri="/Images/appbar.delete.png" />
+            <shell:ApplicationBarIconButton x:Name="abbSettings" Text="settings" IconUri="/Images/appbar.feature.settings.rest.png" Click="abbSettings_Click" />
+            <shell:ApplicationBarIconButton x:Name="abbRefresh" IconUri="/Images/appbar.refresh.rest.png" Text="refresh" Click="abbRefresh_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
     
@@ -48,14 +51,20 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="24,24,0,12">
-            <TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="page name" Margin="-3,-8,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="GATEKEEPER" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="all doors" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentGrid" Grid.Row="1">
-            <ListBox ItemsSource="{Binding Contacts}" ItemTemplate="{StaticResource ContactsTemplate}" />
+        <Grid x:Name="ContentGrid" Grid.Row="1" Background="Black">
+            <ListBox ItemsSource="{Binding Doors}" ItemTemplate="{StaticResource ContactsTemplate}" >
+            	<ListBox.ItemContainerStyle>
+            		<Style TargetType="ListBoxItem">
+            			<Setter Property="HorizontalContentAlignment" Value="Stretch"/>       		
+					</Style>        	
+				</ListBox.ItemContainerStyle>
+			</ListBox>
         </Grid>
     </Grid>
 

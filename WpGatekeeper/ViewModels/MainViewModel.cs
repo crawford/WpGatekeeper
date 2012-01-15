@@ -3,33 +3,52 @@ using WpGatekeeper.Models;
 using System.Collections.ObjectModel;
 using WpGatekeeper.Data;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace WpGatekeeper.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private ObservableCollection<Contact> _contacts;
-        private ContactService _service;
+        private ObservableCollection<Door> _doors;
+        private GatekeeperService _service;
 
         // Parameterless contructor used for designtime contruction
         public MainViewModel()
         {
-            _contacts = new ObservableCollection<Contact>();
-            _contacts.CollectionChanged += (s, e) => { NotifyPropertyChanged("Contacts"); };
+            _doors = new ObservableCollection<Door>();
+            _doors.CollectionChanged += (s, e) => { NotifyPropertyChanged("Doors"); };
         }
 
         // Parametered contructor used for runtime construction
-        public MainViewModel(ContactService service)
-            : this()
+        public MainViewModel(GatekeeperService service)
         {
             _service = service;
-            _service.GetContacts((list) =>
+            UpdateDoors();
+        }
+
+        public void PopDoor(Door door) {
+            _service.PopDoor(door, (response) =>
             {
-                foreach (Contact contact in list)
+                if (!response.Success)
                 {
-                    _contacts.Add(contact);
+                    System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
+                    {
+                        MessageBox.Show(response.Error);
+                    });
                 }
+            });
+        }
+
+        public void UpdateDoors()
+        {
+            _service.FetchDoorStates((list) =>
+            {
+                _doors = new ObservableCollection<Door>(list);
+                System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    NotifyPropertyChanged("Doors");
+                });
             });
         }
 
@@ -43,19 +62,19 @@ namespace WpGatekeeper.ViewModels
 
         #region Getters and Setters
 
-        public ObservableCollection<Contact> Contacts
+        public ObservableCollection<Door> Doors
         {
             get
             {
-                return _contacts;
+                return _doors;
             }
 
             private set
             {
-                if (_contacts != value)
+                if (_doors != value)
                 {
-                    _contacts = value;
-                    NotifyPropertyChanged("Contacts");
+                    _doors = value;
+                    NotifyPropertyChanged("Doors");
                 }
             }
         }
