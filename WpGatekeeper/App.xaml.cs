@@ -18,6 +18,7 @@ namespace WpGatekeeper
         private static MainViewModel _mainViewModel = null;
         private static SettingsViewModel _settingsViewModel = null;
         private static GatekeeperService _gatekeeperService = null;
+        private static SettingsService _settingsService = null;
 
         // Easy access to the viewmodels
         public static MainViewModel MainViewModel
@@ -50,6 +51,17 @@ namespace WpGatekeeper
                     _gatekeeperService = new GatekeeperService();
 
                 return _gatekeeperService;
+            }
+        }
+
+        public static SettingsService SettingsService
+        {
+            get
+            {
+                if (_settingsService == null)
+                    _settingsService = new SettingsService();
+
+                return _settingsService;
             }
         }
 

@@ -6,7 +6,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:WpGatekeeper_ViewModels="clr-namespace:WpGatekeeper.ViewModels"
-	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
+	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
 	x:Class="WpGatekeeper.SettingsPage"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -33,7 +33,7 @@
 			<PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="8,178,0,0" Width="440" VerticalAlignment="Top" Password="{Binding Password, Mode=TwoWay}"/>
 			<TextBox x:Name="txtUsername" Margin="8,80,8,0" TextWrapping="Wrap" VerticalAlignment="Top" InputScope="LogOnName" Text="{Binding Username, Mode=TwoWay}"/>
 			<TextBlock Height="25" Margin="8,156,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top" HorizontalAlignment="Left" Width="164"/>
-			<TextBlock HorizontalAlignment="Left" Margin="8,15,0,0" TextWrapping="Wrap" Text="CSH Account Credentials" VerticalAlignment="Top"/>
+			<TextBlock HorizontalAlignment="Left" Margin="8,15,0,0" TextWrapping="Wrap" Text="CSH Account Credentials" VerticalAlignment="Top" FontSize="26.667"/>
 		</Grid>
 	</Grid>
 </phone:PhoneApplicationPage>

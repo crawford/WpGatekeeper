@@ -67,7 +67,9 @@
     </Compile>
     <Compile Include="Converters\LockStatusColorConverter.cs" />
     <Compile Include="Converters\LockStatusConverter.cs" />
+    <Compile Include="Data\Crypto.cs" />
     <Compile Include="Data\GatekeeperService.cs" />
+    <Compile Include="Data\SettingsService.cs" />
     <Compile Include="Models\Door.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

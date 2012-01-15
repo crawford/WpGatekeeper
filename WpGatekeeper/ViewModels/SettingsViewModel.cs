@@ -10,6 +10,12 @@ namespace WpGatekeeper.ViewModels
         private string _username;
         private string _password;
 
+        public SettingsViewModel()
+        {
+            Username = App.SettingsService.Username;
+            Password = App.SettingsService.Password;
+        }
+
         public void ShowView(NavigationService navigation)
         {
             navigation.Navigate(new Uri("/Views/SettingsPage.xaml", UriKind.Relative));
@@ -37,6 +43,7 @@ namespace WpGatekeeper.ViewModels
                 {
                     _username = value;
                     NotifyPropertyChanged("Username");
+                    App.SettingsService.Username = _username;
                     App.GatekeeperService.SetUsernamePassword(_username, _password);
                 }
             }
@@ -54,6 +61,7 @@ namespace WpGatekeeper.ViewModels
                 {
                     _password = value;
                     NotifyPropertyChanged("Password");
+                    App.SettingsService.Password = _password;
                     App.GatekeeperService.SetUsernamePassword(_username, _password);
                 }
             }

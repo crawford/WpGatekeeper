@@ -25,12 +25,6 @@ namespace WpGatekeeper.Data
             request.Method = "POST";
             request.BeginGetRequestStream((reqResult) =>
             {
-                Stream requestStream = request.EndGetRequestStream(reqResult);
-                using (StreamWriter writer = new StreamWriter(requestStream))
-                {
-
-                }
-
                 request.BeginGetResponse((resResult) =>
                 {
                     try
@@ -72,7 +66,8 @@ namespace WpGatekeeper.Data
                         Response temp = serializer.ReadObject(responseStream) as Response;
                         callback(temp);
                     }
-                    catch (WebException e) {
+                    catch (WebException e)
+                    {
                         System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
                         {
                             MessageBox.Show(e.Message);
