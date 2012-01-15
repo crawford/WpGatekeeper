@@ -21,7 +21,7 @@ namespace WpGatekeeper.Data
 
         public void FetchDoorStates(Action<List<Door>> callback)
         {
-            HttpWebRequest request = WebRequest.CreateHttp(@"http://gatekeeper.csh.rit.edu/api/all_doors");
+            HttpWebRequest request = WebRequest.CreateHttp(@"https://gatekeeper.csh.rit.edu/api/all_doors");
             request.Method = "POST";
             request.BeginGetRequestStream((reqResult) =>
             {
@@ -53,7 +53,7 @@ namespace WpGatekeeper.Data
 
         public void PopDoor(Door door, Action<Response> callback)
         {
-            HttpWebRequest request = WebRequest.CreateHttp(String.Format("http://gatekeeper.csh.rit.edu/api/pop/{0}", door.Id));
+            HttpWebRequest request = WebRequest.CreateHttp(String.Format("https://gatekeeper.csh.rit.edu/api/pop/{0}", door.Id));
             request.Method = "POST";
             request.BeginGetRequestStream((reqResult) =>
             {
