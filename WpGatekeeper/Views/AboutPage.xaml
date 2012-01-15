@@ -28,9 +28,10 @@
 
 		<!--ContentPanel - place additional content here-->
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="CSH Gatekeeper Client " VerticalAlignment="Top" Width="456" FontSize="36" TextAlignment="Center" Margin="0,148,0,0"/>
-			<TextBlock Margin="0,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center" FontSize="24"><Run Text="Alex Crawford"/><LineBreak/><Run Text="Geoff Hotchkiss"/></TextBlock>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="CSH Gatekeeper Client" VerticalAlignment="Top" Width="456" FontSize="36" TextAlignment="Center" Margin="0,148,0,0"/>
+			<TextBlock Margin="0,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Center" FontSize="24"><Run Text="Alex Crawford"/><LineBreak/><Run Text="Geoff Hotchkiss"/></TextBlock>
 			<Button Content="Please Report Issues Here" Margin="0,0,0,137" VerticalAlignment="Bottom" d:LayoutOverrides="Width" HorizontalAlignment="Center" Click="Report_Click"/>
-		</Grid>
+            <TextBlock Height="30" HorizontalAlignment="Center" Margin="0,200,0,0" Text="Version 0.1" VerticalAlignment="Top" />
+        </Grid>
 	</Grid>
 </phone:PhoneApplicationPage>
